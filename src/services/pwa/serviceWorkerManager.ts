@@ -196,7 +196,7 @@ export function recoverManagedAssetLoad(rawUrl: string | null): boolean {
   return true
 }
 
-export async function purgeManagedRuntimeCaches(
+async function purgeManagedRuntimeCaches(
   groups?: readonly RuntimeCacheGroup[]
 ): Promise<boolean> {
   const normalizedGroups = normalizeRuntimeCacheGroups(groups)

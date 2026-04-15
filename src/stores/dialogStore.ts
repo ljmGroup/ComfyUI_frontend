@@ -96,7 +96,7 @@ export interface ShowDialogOptions<
   priority?: number
 }
 
-export interface DialogStore {
+interface DialogStore {
   dialogStack: Ref<StoredDialogInstance[]>
   riseDialog: (options: { key: string }) => void
   closeDialog: (options?: { key: string }) => void

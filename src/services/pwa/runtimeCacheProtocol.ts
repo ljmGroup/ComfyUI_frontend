@@ -12,7 +12,7 @@ const RUNTIME_CACHE_PREFIXES: Record<RuntimeCacheGroup, string> = {
 
 const runtimeCacheGroupSet = new Set<string>(RUNTIME_CACHE_GROUPS)
 
-export function getRuntimeCacheVersion(): string {
+function getRuntimeCacheVersion(): string {
   return __COMFYUI_SW_CACHE_VERSION__
 }
 
@@ -24,15 +24,15 @@ export function getRuntimeCacheNames(): string[] {
   return RUNTIME_CACHE_GROUPS.map((group) => getRuntimeCacheName(group))
 }
 
-export function getRuntimeCachePrefix(group: RuntimeCacheGroup): string {
+function getRuntimeCachePrefix(group: RuntimeCacheGroup): string {
   return RUNTIME_CACHE_PREFIXES[group]
 }
 
-export function getRuntimeCachePrefixes(): string[] {
+function getRuntimeCachePrefixes(): string[] {
   return RUNTIME_CACHE_GROUPS.map((group) => getRuntimeCachePrefix(group))
 }
 
-export function isRuntimeCacheGroup(value: string): value is RuntimeCacheGroup {
+function isRuntimeCacheGroup(value: string): value is RuntimeCacheGroup {
   return runtimeCacheGroupSet.has(value)
 }
 
