@@ -86,8 +86,22 @@ jobs:
             exit 1
           fi
 
-      - name: Upload to PyPI
+      - name: Check PyPI credentials
         env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_KEY }}
-        run: python -m twine upload comfyui_frontend_package/dist/*
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+          PYPI_KEY: ${{ secrets.PYPI_KEY }}
+        run: |
+          if [[ -n "$PYPI_TOKEN" ]]; then
+            echo "Using secrets.PYPI_TOKEN"
+          elif [[ -n "$PYPI_KEY" ]]; then
+            echo "Using secrets.PYPI_KEY"
+          else
+            echo "Missing PyPI credentials. Configure repository secret PYPI_TOKEN or PYPI_KEY."
+            exit 1
+          fi
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_TOKEN || secrets.PYPI_KEY }}
+          packages-dir: comfyui_frontend_package/dist
